@@ -2,6 +2,7 @@
 include "classes/connection.php";
 $connect = new Db();
 $connect->login();
+
 // session_start();
 // $_SESSION['user'] = '';
 // $_SESSION['userId'] = '';
@@ -44,14 +45,22 @@ $connect->login();
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.js"></script>
     <title>Login</title>
+    <style>
+        body{
+            background-color: lightslategrey;
+        }
+    </style>
 </head>
 
 <body>
    <!-- <form method="POST" enctype="multipart/form-data"> -->
-    <div class="container">
-	<div class="row">
+
+    <div class="container-lg bg-light py-5 " style="margin-top:10rem;">
+
+	<div class="row justify-content-center ">
+
 		<form method="post" class="form-horizontal col-md-6 col-md-offset-3">
-			<h2>Create Operation in CRUD Application</h2>
+        <h2 class="d-flex justify-content-sm-center" style="margin-right:8rem">Login</h2>
 			<div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-10">
@@ -66,7 +75,7 @@ $connect->login();
 			    </div>
 			</div>
 			<input type="submit" name="submit" class="btn btn-primary col-md-10 col-md-offset-10" value="submit" />
-            <div class="btn-danger col-md-10"><?php echo  $connect->msg ?></div>
+            <div class=" d-flex bg-danger col-md-10 mt-1 justify-content-center" style="color:white";><?php echo  $connect->msg ?></div>
 		</form>
 	</div>
 </div>
