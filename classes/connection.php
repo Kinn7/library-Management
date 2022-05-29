@@ -19,15 +19,27 @@ class Db{
     }
 
 
+    public function getPublishers(){
+        $query = "SELECT * FROM publishers";
+        $res = $this->connect()->query($query);
+
+        if($res->num_rows){
+            while($row = $res->fetch_object()){
+
+                echo "<td>" . $row->pub_name . "</td>" ;
+                echo "<td>" . $row->country . "</td>" ;
+                echo "<td>" . $row->headquarter . "</td>" ;
+                echo "<td>" . $row->no_of_branch . "</td>" ;
+            }
+        }
+    }
+
+
     public function login(){
         session_start();
         $_SESSION['user'] = '';
         $_SESSION['userId'] = '';
-      //  include "classes/connection.php";
-      //  $msg = "";
         if(isset($_POST['submit'])){
-      //  $connect = new Db();
-
         $name = mysqli_real_escape_string($this->connect(),$_POST['name']);
         $pass = mysqli_real_escape_string($this->connect(),$_POST['password']);
         $pass = md5($pass);
