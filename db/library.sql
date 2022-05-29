@@ -11,7 +11,7 @@ CREATE TABLE `publishers` (
 `pubId` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 `pub_name` varchar(100) NOT NULL DEFAULT 'unknown',
 `country` varchar(50) NOT NULL DEFAULT 'unknown',
-`country_office` varchar(50) NOT NULL DEFAULT 'unknown',
+`headquarter` varchar(50) NOT NULL DEFAULT 'unknown',
 `no_of_branch` int NOT NULL DEFAULT 0
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
