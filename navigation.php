@@ -60,7 +60,7 @@ if(!$userId){
     <!-- sidebar -->
     <div class="col-1">
         <nav id="sidebar" class="col sidebar">
-            <a href="#" class="navbar-brand">
+            <a href="dashboard.php" class="navbar-brand">
                 <img src="./assets/logo.png" alt="logo" class="logo">
             </a>
             <ul class="nav flex-column vertical-nav">
