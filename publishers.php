@@ -8,6 +8,7 @@ $pubs = new Db();
 ?>
 
 <div class="main">
+    <a href="createPublisher.php" class="btn btn-primary p-2 mb-5 ">Add  Publisher</a>
     <h2 class="display3 d-flex justify-content-center mb-5">List of Publishers</h2>
     <table class="table">
         <thead>
@@ -19,9 +20,9 @@ $pubs = new Db();
             </tr>
         </thead>
         <tbody>
-            <tr>
+           
                 <?php $pubs->getPublishers(); ?>
-            </tr>
+            
         </tbody>
 
     </table>
