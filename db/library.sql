@@ -31,10 +31,12 @@ FOREIGN KEY (pubID) REFERENCES publishers(pubID)
 
 CREATE TABLE `members`(
 `membId` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`memb_name` varchar(100) NOT NULL,
 `name` varchar(100) NOT NULL,
-`email` varchar(100)  DEFAULT NULL,
-`phone_no` varchar(100) NOT NULL ,
-`books_borrowed` int DEFAULT 0 #number of books borrwed 
+`email` varchar(100)  DEFAULT NULL UNIQUE,
+`phone_no` varchar(100) NOT NULL UNIQUE,
+`books_borrowed` int DEFAULT 0 #number of books borrwed,
+`memb_code` varchar(20) NOT NULL UNIQUE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `borrowed_by`(
