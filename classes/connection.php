@@ -48,6 +48,22 @@ class Db{
 
     }
 
+    public function editPublishers(){
+        if(isset($_GET['id'])){
+            $id = $this->sanitize($_GET['id']);
+            $query = "SELECT * FROM publishers WHERE pubId='$id' LIMIT 1";
+            $res = $this->connect()->query($query);
+            if($res->num_rows){
+                return $res->fetch_object();
+                }else{
+                    $query = "SELECT * FROM publishers WHERE pubId='1' LIMIT 1";
+                    $res = $this->connect()->query($query);
+                    return $res->fetch_object();
+                }
+            
+        }
+    }
+
     public function getMembers()
     {
         $query = "SELECT * FROM members";
@@ -61,8 +77,8 @@ class Db{
                 echo "<td>" . $row->phone_no . "</td>" ;
                 echo "<td>" . $row->books_borrowed . "</td>" ;
                 echo "<td>" . $row->member_code . "</td>" ;
-                echo "<td> <a class='btn btn-success text-white' href='editPublisher.php?id={$row->membId}' >" . "Edit" . "</a></td>"  ;
-                echo "<td> <a class='btn btn-danger text-white' href='deletePublisher.php?id={$row->membId}' >" . "Delete" . "</a></td>"  ;
+                echo "<td> <a class='btn btn-success text-white' href='editMember.php?id={$row->membId}' >" . "Edit" . "</a></td>"  ;
+                echo "<td> <a class='btn btn-danger text-white' href='deleteMember.php?id={$row->membId}' >" . "Delete" . "</a></td>"  ;
                 echo "</tr>";
             }
         }
@@ -81,12 +97,35 @@ class Db{
         //echo $StudentId;
 
         $query = "INSERT INTO `members` (memb_name, email, phone_no, member_code) VALUES ('$membName', '$email', '$phoneNo','$memberId')";
+        try{
         $res = $this->connect()->query($query);
-        if($res){
-            return true;
-        }else{
-            return false;
+        }catch(Exception $e){
+
+            if($e->getCode() == 1062){
+                $this->msg = "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
+                          <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
+                          <div>
+                          Duplicate Email or Phone Detected
+                          </div>
+                        </div>";
+                
+            }
         }
+        // if($res){
+        // //     $this->msg =  '"<div class="alert alert-success d-flex align-items-center justify-content-center h6" role="alert">
+        // //     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        // //     <div>
+        // //       Successfully inserted data
+        // //     </div>
+        // //   </div>"';
+        //   $this->msg = "<div class='alert alert-success d-flex align-items-center justify-content-center h6' role='alert'>
+        //   <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:'><use xlink:href='#exclamation-circle-fill'/></svg>
+        //   <div>
+        //   Successfully inserted data
+        //   </div>
+        // </div>";
+        // }
+
     }
 
     public function sanitize($var){
@@ -134,4 +173,3 @@ public static function logout(){
 
 // $returnValue = new Db();
 //  $returnValue->connect();
-?>
