@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 //include_once "session.php";
 $currentPage = "members.php";
 include_once "navigation.php";
@@ -10,30 +11,36 @@ if(isset($_POST) && (!empty($_POST['membName']) && !empty($_POST['email']) && !e
     $res = $pub->createMembers($membName,$email,$phoneNo);
 
     if($res){
-        $pub->msg =  '"<div class="alert alert-success d-flex align-items-center justify-content-center h6" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+        $pub->msg =  "<div class='alert alert-success d-flex align-items-center justify-content-center h6' role='alert'>
+        <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:''><use xlink:href='#check-circle-fill'/></svg>
         <div>
           Successfully inserted data
         </div>
-      </div>"';
+      </div>";
     }
     else{
-        $pub->msg =  "failed to insert data";
+        $pub->msg =  "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
+        <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
+        <div>
+        Duplicate Email or Phone Detected
+        </div>
+      </div>";
     }
 }
-// elseif(isset($_POST['submit']) && (empty($_POST['pubName']) || empty($_POST['country']) || empty($_POST['branches']))){
-//    // $pub->msg = "<div class='d-flex bg-danger col-md-5 mt-1 justify-content-center  text-white'>Failed to  insert data</div>";
-//     $pub->msg = "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
-//     <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
-//     <div>
-//     Failed to insert data
-//     </div>
-//   </div>";
+elseif(isset($_POST['submit']) && (empty($_POST['membName']) && empty($_POST['email']) && empty($_POST['phoneNo']))){
+   // $pub->msg = "<div class='d-flex bg-danger col-md-5 mt-1 justify-content-center  text-white'>Failed to  insert data</div>";
+    $pub->msg = "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
+    <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
+    <div>
+    Failed to insert data
+    </div>
+  </div>";
   
-// }
+}
 
 ?>
 <div class="main">
+    <?php echo $pub->msg; ?>
     <h2 class="text-primary">Add Member</h2>
     <div class="border container" style="padding:30px">
         <form  method="post">
