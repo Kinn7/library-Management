@@ -64,6 +64,10 @@ class Db{
         }
     }
 
+    public function deletePublishers(){
+
+    }
+
     public function getMembers()
     {
         $query = "SELECT * FROM members";
@@ -99,37 +103,37 @@ class Db{
         $query = "INSERT INTO `members` (memb_name, email, phone_no, member_code) VALUES ('$membName', '$email', '$phoneNo','$memberId')";
         try{
         $res = $this->connect()->query($query);
+        if($res){
+            return true;
+        }
         }catch(Exception $e){
 
             if($e->getCode() == 1062){
-                $this->msg = "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
-                          <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
-                          <div>
-                          Duplicate Email or Phone Detected
-                          </div>
-                        </div>";
+                return false;
                 
             }
         }
-        // if($res){
-        // //     $this->msg =  '"<div class="alert alert-success d-flex align-items-center justify-content-center h6" role="alert">
-        // //     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-        // //     <div>
-        // //       Successfully inserted data
-        // //     </div>
-        // //   </div>"';
-        //   $this->msg = "<div class='alert alert-success d-flex align-items-center justify-content-center h6' role='alert'>
-        //   <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:'><use xlink:href='#exclamation-circle-fill'/></svg>
-        //   <div>
-        //   Successfully inserted data
-        //   </div>
-        // </div>";
-        // }
 
     }
 
+    public function editMembers(){
+        if(isset($_GET['id'])){
+            $id = $this->sanitize($_GET['id']);
+            $query = "SELECT * FROM members WHERE membId='$id' LIMIT 1";
+            $res = $this->connect()->query($query);
+            if($res->num_rows){
+                return $res->fetch_object();
+                }else{
+                    $query = "SELECT * FROM members WHERE membId='1' LIMIT 1";
+                    $res = $this->connect()->query($query);
+                    return $res->fetch_object();
+                }
+            
+        }
+    }
+
     public function sanitize($var){
-		$return = mysqli_real_escape_string($this->connect(), $var);
+		$return = trim(mysqli_real_escape_string($this->connect(), $var));
 		return $return;
 	}
 
