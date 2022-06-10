@@ -26,8 +26,21 @@ if(isset($_POST['id']) ){ // && (!empty($_POST['pubName']) && !empty($_POST['cou
 
     if(isset($_POST['submit']) && !empty($_POST['membName'])){
     $query = "UPDATE members SET memb_name='$membName', email='$email', phone_no='$phoneNo', member_code='$memberCode' WHERE membId='$membId'";
-    $db->connect()->query($query);
-    header("Location: members.php");
+    //$db->connect()->query($query);
+    //header("Location: members.php");
+    try{
+        $rr = $db->connect()->query($query);
+        if($rr){
+            header("Location: members.php");
+        }
+        }catch(Exception $e){
+
+            if($e->getCode() == 1062){
+               $db->msg = "error";
+                
+            }
+        }
+        
   }else{
         $db->msg = "hello";
     }
