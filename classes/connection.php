@@ -18,6 +18,9 @@ class Db{
         
     }
 
+    public function getBooks(){
+        
+    }
 
     public function getPublishers(){
         $query = "SELECT * FROM publishers";
@@ -65,7 +68,14 @@ class Db{
     }
 
     public function deletePublishers(){
-
+        if(isset($_GET['id'])){
+            $id = $this->sanitize($_GET['id']);
+            $query = "DELETE FROM publishers WHERE pubId='$id'";
+            $res = $this->connect()->query($query);
+            if($res){
+                header("Location: publishers.php");
+            }
+        }
     }
 
     public function getMembers()
@@ -129,6 +139,17 @@ class Db{
                     return $res->fetch_object();
                 }
             
+        }
+    }
+
+    public function deleteMembers(){
+        if(isset($_GET['id'])){
+            $id = $this->sanitize($_GET['id']);
+            $query = "DELETE FROM members WHERE membId='$id'";
+            $res = $this->connect()->query($query);
+            if($res){
+                header("Location: members.php");
+            }
         }
     }
 
