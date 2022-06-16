@@ -3,7 +3,9 @@
 $currentPage = "publishers.php";
 include "navigation.php";
 
-$pubs = new Db();
+$db = new Db();
+$publishers = $db->getPublishers();
+//$rows =  $pubs->getPublishers()->pub_name;
 
 ?>
 
@@ -21,7 +23,24 @@ $pubs = new Db();
         </thead>
         <tbody>
            
-                <?php $pubs->getPublishers(); ?>
+                <!-- < ? php//$pubs->getPublishers(); ?> -->
+                <?php 
+                //$rows = $pubs->getPublishers()->fetch_assoc();
+                // while( $publisher = $publishers->fetch_object())
+                foreach($publishers as $publisher)
+                {
+                echo " <tr>";
+                echo "<td>" . $publisher->pub_name . "</td>" ;
+                echo "<td>" . $publisher->country . "</td>" ;
+                echo "<td>" . $publisher->headquarter . "</td>" ;
+                echo "<td>" . $publisher->no_of_branch . "</td>" ;
+                echo "<td> <a class='btn btn-success text-white' href='editPublisher.php?id={$publisher->pubId}' >" . "Edit" . "</a></td>"  ;
+                echo "<td> <a class='btn btn-danger text-white' href='deletePublisher.php?id={$publisher->pubId}' >" . "Delete" . "</a></td>"  ;
+                echo "</tr>";
+                }
+                //$publishers->free();
+                ?>
+
             
         </tbody>
 
