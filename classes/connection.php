@@ -18,8 +18,25 @@ class Db{
         
     }
 
-    public function getBooks(){
-        
+    public function addBooks($bookImg, $isbn, $author, $title ,$price, $available, $quantity, $pubId){
+       $query = "INSERT INTO `books`(book_img, isbn, author, title, price, available, quantity, pubId) VALUES ('$bookImg', '$isbn', '$author', '$title' ,'$price', '$available', '$quantity', '$pubId')";
+       $res = $this->connect()->query($query);
+       if($res){
+           return true;
+       }else{
+           return false;
+       }
+    }
+
+    public function getBooks()
+    {
+        $query = "SELECT books.book_img,books.title,books.isbn, books.author, books.quantity, 
+        books.price, books.available, publishers.pub_name FROM books JOIN publishers ON books.pubId=publishers.pubId";
+
+        $res = $this->connect()->query($query);
+        if($res->num_rows){
+            return $res;
+        }
     }
 
     public function getPublishers(){
@@ -27,16 +44,29 @@ class Db{
         $res = $this->connect()->query($query);
 
         if($res->num_rows){
+            //return $res;
+            $data = array();
             while($row = $res->fetch_object()){
-                echo " <tr>";
-                echo "<td>" . $row->pub_name . "</td>" ;
-                echo "<td>" . $row->country . "</td>" ;
-                echo "<td>" . $row->headquarter . "</td>" ;
-                echo "<td>" . $row->no_of_branch . "</td>" ;
-                echo "<td> <a class='btn btn-success text-white' href='editPublisher.php?id={$row->pubId}' >" . "Edit" . "</a></td>"  ;
-                echo "<td> <a class='btn btn-danger text-white' href='deletePublisher.php?id={$row->pubId}' >" . "Delete" . "</a></td>"  ;
-                echo "</tr>";
+                $data[] = $row;
             }
+                return $data;
+            
+
+            // $rows = $res->fetch_object();
+            // foreach($rows as $row){
+            //     return $row;
+            // }
+
+            // while($row = $res->fetch_object()){
+            //     echo " <tr>";
+            //     echo "<td>" . $row->pub_name . "</td>" ;
+            //     echo "<td>" . $row->country . "</td>" ;
+            //     echo "<td>" . $row->headquarter . "</td>" ;
+            //     echo "<td>" . $row->no_of_branch . "</td>" ;
+            //     echo "<td> <a class='btn btn-success text-white' href='editPublisher.php?id={$row->pubId}' >" . "Edit" . "</a></td>"  ;
+            //     echo "<td> <a class='btn btn-danger text-white' href='deletePublisher.php?id={$row->pubId}' >" . "Delete" . "</a></td>"  ;
+            //     echo "</tr>";
+            // }
         }
     }
 
@@ -134,6 +164,9 @@ class Db{
             if($res->num_rows){
                 return $res->fetch_object();
                 }else{
+                    /*Add this three lines so that if the user enters non existent id on the db in the url it won't display error 
+                      by default it will display the information of memberId 1 
+                      */
                     $query = "SELECT * FROM members WHERE membId='1' LIMIT 1";
                     $res = $this->connect()->query($query);
                     return $res->fetch_object();
