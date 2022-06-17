@@ -2,7 +2,7 @@
 $currentPage = "members.php";
 include "navigation.php";
 //include "classes/connection.php";
- $db = new Db();
+
  $row = $db->editMembers();
 //  if(isset($_GET['id'])){
 //     $id = $db->sanitize($_GET['id']);

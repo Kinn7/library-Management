@@ -1,7 +1,6 @@
 <?php
 $currentPage = "books.php";
 include "navigation.php";
-$db = new Db();
 $publishers = $db->getPublishers();
 if(isset($_POST['submit'])) //&& !empty($_POST['title']) && !empty($_POST['author']) && !empty($_POST['isbn']) && !empty($_POST['price']) && !empty($_POST['available']) && !empty($_POST['qty'] && !empty($_POST['publisher'])) )
 {
@@ -42,7 +41,6 @@ if(isset($_POST['submit'])) //&& !empty($_POST['title']) && !empty($_POST['autho
 
 ?>
 <div class="main">
-
 <h2 class="text-primary">Add Book</h2>
 <div class="border container" style="padding:30px">
     <form  method="post" enctype="multipart/form-data">
@@ -85,10 +83,13 @@ if(isset($_POST['submit'])) //&& !empty($_POST['title']) && !empty($_POST['autho
         <div class="form-group col-md-6">
                 <label for="headquarter">Publisher</label>
                 <select class="form-select" name="publisher" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
+                    <option selected>Choose Publishers</option>
                     <?php 
-                    foreach($publishers as $publisher){
-                        echo "<option value=$publisher->pubId>$publisher->pub_name</option>";
+                    // foreach($publishers as $publisher){
+                    //     echo "<option value=$publisher->pubId>$publisher->pub_name</option>";
+                    // }
+                    while($row = $publishers->fetch_object()){
+                        echo "<option value=$row->pubId>$row->pub_name</option>";
                     }
                     ?>
                 </select>

@@ -3,15 +3,14 @@ error_reporting(E_ALL);
 //include_once "session.php";
 $currentPage = "members.php";
 include_once "navigation.php";
-$pub = new Db();
 if(isset($_POST) && (!empty($_POST['membName']) && !empty($_POST['email']) && !empty($_POST['phoneNo']))){
-    $membName = $pub->sanitize($_POST['membName']);
-    $email = $pub->sanitize($_POST['email']);
-    $phoneNo = $pub->sanitize($_POST['phoneNo']);
-    $res = $pub->createMembers($membName,$email,$phoneNo);
+    $membName = $db->sanitize($_POST['membName']);
+    $email = $db->sanitize($_POST['email']);
+    $phoneNo = $db->sanitize($_POST['phoneNo']);
+    $res = $db->createMembers($membName,$email,$phoneNo);
 
     if($res){
-        $pub->msg =  "<div class='alert alert-success d-flex align-items-center justify-content-center h6' role='alert'>
+        $db->msg =  "<div class='alert alert-success d-flex align-items-center justify-content-center h6' role='alert'>
         <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:''><use xlink:href='#check-circle-fill'/></svg>
         <div>
           Successfully inserted data
@@ -19,7 +18,7 @@ if(isset($_POST) && (!empty($_POST['membName']) && !empty($_POST['email']) && !e
       </div>";
     }
     else{
-        $pub->msg =  "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
+        $db->msg =  "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
         <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
         <div>
         Duplicate Email or Phone Detected
@@ -29,7 +28,7 @@ if(isset($_POST) && (!empty($_POST['membName']) && !empty($_POST['email']) && !e
 }
 elseif(isset($_POST['submit']) && (empty($_POST['membName']) && empty($_POST['email']) && empty($_POST['phoneNo']))){
    // $pub->msg = "<div class='d-flex bg-danger col-md-5 mt-1 justify-content-center  text-white'>Failed to  insert data</div>";
-    $pub->msg = "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
+    $db->msg = "<div class='alert alert-danger d-flex align-items-center justify-content-center h6' role='alert'>
     <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Danger:'><use xlink:href='#exclamation-triangle-fill'/></svg>
     <div>
     Failed to insert data
@@ -40,7 +39,7 @@ elseif(isset($_POST['submit']) && (empty($_POST['membName']) && empty($_POST['em
 
 ?>
 <div class="main">
-    <?php echo $pub->msg; ?>
+    <?php echo $db->msg; ?>
     <h2 class="text-primary">Add Member</h2>
     <div class="border container" style="padding:30px">
         <form  method="post">

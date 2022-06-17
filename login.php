@@ -1,7 +1,6 @@
 <?php
 include "classes/connection.php";
-$connect = new Db();
-$connect->login();
+$db->login();
 
 // session_start();
 // $_SESSION['user'] = '';
