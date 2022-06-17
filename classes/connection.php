@@ -2,10 +2,10 @@
 
 class Db{
     
-    protected $dbHost="localhost";
-    protected $dbUser="root";
-    protected $dbPass="";
-    protected $dbName="library_management";
+    protected $dbHost="remotemysql.com";
+    protected $dbUser="q0FJQwNpKQ";
+    protected $dbPass="cbLPjOsGHK";
+    protected $dbName="q0FJQwNpKQ";
     public $msg=" ";
 
     public function connect(){
