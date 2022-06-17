@@ -1,4 +1,4 @@
-# Library Management System :book:
+# :book: Library Management System 
 A Library management system where a librarian can manage books.
 
 Features of the system.
