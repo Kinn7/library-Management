@@ -3,8 +3,6 @@
 $currentPage = "members.php";
 include "navigation.php";
 
-$pubs = new Db();
-
 ?>
 
 <div class="main">
@@ -22,7 +20,7 @@ $pubs = new Db();
         </thead>
         <tbody>
            
-                <?php $pubs->getMembers(); ?>
+                <?php $db->getMembers(); ?>
             
         </tbody>
 

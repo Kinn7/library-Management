@@ -3,7 +3,7 @@
 $currentPage = "publishers.php";
 include "navigation.php";
 
-$db = new Db();
+//$db = new Db();
 $publishers = $db->getPublishers();
 //$rows =  $pubs->getPublishers()->pub_name;
 
@@ -26,8 +26,8 @@ $publishers = $db->getPublishers();
                 <!-- < ? php//$pubs->getPublishers(); ?> -->
                 <?php 
                 //$rows = $pubs->getPublishers()->fetch_assoc();
-                // while( $publisher = $publishers->fetch_object())
-                foreach($publishers as $publisher)
+                while( $publisher = $publishers->fetch_object())
+                // foreach($publishers as $publisher)
                 {
                 echo " <tr>";
                 echo "<td>" . $publisher->pub_name . "</td>" ;
