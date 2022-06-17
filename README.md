@@ -18,5 +18,5 @@ Features of the system.
 * Librarian can view/search for listed books in the library
 
 
-non-functional requirements
--a single member can borrow 2 different books.
+### Non-functional requirement
+* a single member can borrow 2 different books.
