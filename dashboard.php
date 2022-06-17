@@ -5,7 +5,7 @@ include_once "navigation.php";
 ?>
 <div class="main">
     <p>
-        dashboard
+        Kalista Man endet ayhew the website
     </p>
 </div>
 
