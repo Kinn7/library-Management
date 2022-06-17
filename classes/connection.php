@@ -30,7 +30,7 @@ class Db{
 
     public function getBooks()
     {
-        $query = "SELECT books.book_img,books.title,books.isbn, books.author, books.quantity, 
+        $query = "SELECT books.bookid, books.book_img,books.title,books.isbn, books.author, books.quantity, 
         books.price, books.available, publishers.pub_name FROM books JOIN publishers ON books.pubId=publishers.pubId";
 
         $res = $this->connect()->query($query);
@@ -44,12 +44,12 @@ class Db{
         $res = $this->connect()->query($query);
 
         if($res->num_rows){
-            //return $res;
-            $data = array();
-            while($row = $res->fetch_object()){
-                $data[] = $row;
-            }
-                return $data;
+            return $res;
+            // $data = array();
+            // while($row = $res->fetch_object()){
+            //     $data[] = $row;
+            // }
+            //     return $data;
             
 
             // $rows = $res->fetch_object();
@@ -228,6 +228,6 @@ public static function logout(){
     
 
 }
-
+$db = new Db();
 // $returnValue = new Db();
 //  $returnValue->connect();
