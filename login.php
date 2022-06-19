@@ -55,11 +55,11 @@ $db->login();
    <!-- <form method="POST" enctype="multipart/form-data"> -->
 
     <div class="container-lg bg-light py-5 " style="margin-top:10rem;">
-
 	<div class="row justify-content-center ">
 
 		<form method="post" class="form-horizontal col-md-6 col-md-offset-3">
         <h2 class="d-flex justify-content-sm-center" style="margin-right:8rem">Login</h2>
+		<h6 class="d-flex justify-content-sm-center" style="margin-right:8rem;">admin/admin</h6>
 			<div class="form-group">
 			    <label for="name" class="col-sm-2 control-label">Name</label>
 			    <div class="col-sm-10">
@@ -74,7 +74,7 @@ $db->login();
 			    </div>
 			</div>
 			<input type="submit" name="submit" class="btn btn-primary col-md-10 col-md-offset-10" value="submit" />
-            <div class=" d-flex bg-danger col-md-10 mt-1 justify-content-center" style="color:white";><?php echo  $connect->msg ?></div>
+            <div class=" d-flex bg-danger col-md-10 mt-1 justify-content-center" style="color:white";><?php echo  $db->msg ?></div>
 		</form>
 	</div>
 </div>
