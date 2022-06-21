@@ -30,9 +30,17 @@ class Db{
 
     public function getBooks()
     {
-        $query = "SELECT books.bookid, books.book_img,books.title,books.isbn, books.author, books.quantity, 
-        books.price, books.available, publishers.pub_name FROM books JOIN publishers ON books.pubId=publishers.pubId";
+        $query = "SELECT books.bookid, books.book_img,books.title FROM books JOIN publishers ON books.pubId=publishers.pubId";
 
+        $res = $this->connect()->query($query);
+        if($res->num_rows){
+            return $res;
+        }
+    }
+
+    public function getBookById($id){
+        $query = "SELECT books.book_img, books.title, books.isbn, books.author, books.quantity, books.price, books.available, publishers.pub_name 
+        FROM books JOIN publishers on books.pubId = publishers.pubId WHERE books.bookid = $id LIMIT 1";
         $res = $this->connect()->query($query);
         if($res->num_rows){
             return $res;
