@@ -4,6 +4,11 @@ include "navigation.php";
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $books = $db->getBookById($id)->fetch_object();
+    $available = "No";
+    if($books->available == 1){
+        $available = "Yes";
+    }
+    
 //    $fetch = $books->fetch_object();
 }
 ?>
@@ -37,7 +42,7 @@ if(isset($_GET['id'])){
             <div class="w-100"></div>
 
         <div class="col d-flex justify-content-center">
-        <?php echo "<h5><strong>Availability</strong>: $books->available </h5>"; ?>
+        <?php echo "<h5><strong>Availability</strong>: $available </h5>"; ?>
             </div>
             <div class="w-100"></div>
 
