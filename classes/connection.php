@@ -6,7 +6,6 @@ class Db{
     protected $dbUser="q0FJQwNpKQ";
     protected $dbPass="cbLPjOsGHK";
     protected $dbName="q0FJQwNpKQ";
-    protected $msg2 = "";
     public $msg=" ";
 
     public function connect(){
